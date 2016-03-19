@@ -1,57 +1,53 @@
 package com.github.peterungvari.typicalbackend;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author jupi
  */
+@Repository
 public class PersonDao {
     
-    private String findAllPersonSql;
-    private String insertPersonSql;
+    // SQL data accessor configured by spring boot based on settings of application.properties
+    @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
+    
+    @Autowired
+    private Environment env; // Use environment to get queries from xml properties file.
+    
+    @Autowired
+    private PersonRowMapper rowMapper;
+    
+    public List<Person> findAll() {
+	return jdbcTemplate.query(env.getRequiredProperty("sql.person.findAll"), rowMapper);
+    }
 
-    public PersonDao(NamedParameterJdbcTemplate jdbcTemplate) {
-	this.jdbcTemplate = jdbcTemplate;
+    public Person findByName(String name) {
+	MapSqlParameterSource params = new MapSqlParameterSource("name", name);
+	return jdbcTemplate.queryForObject(env.getRequiredProperty("sql.person.findByName"), params, rowMapper);
     }
     
-    public void setFindAllPersonSql(String findAllPersonSql) {
-	this.findAllPersonSql = findAllPersonSql;
-    }
-
-    public void setInsertPersonSql(String insertPersonSql) {
-	this.insertPersonSql = insertPersonSql;
-    }
- 
-    public List<Person> findAllPerson() {
-	List<Map<String, Object>> results = jdbcTemplate.queryForList(findAllPersonSql, new MapSqlParameterSource());
-	List<Person> persons = new ArrayList<>();
-	
-	for(Map<String, Object> row : results) {
-	    Person person = new Person();
-	    person.setName((String)row.get("name"));
-	    person.setAge((int)row.get("age"));
-	    persons.add(person);
-	}
-	
-	return persons;
+    public List<Person> findNextPage(String afterName, int maxResults) {
+	MapSqlParameterSource params = new MapSqlParameterSource("name", afterName).addValue("limit", maxResults);
+	return jdbcTemplate.query(env.getRequiredProperty("sql.person.findNextPage"), params, rowMapper);
     }
     
-    public List<Person> findAllPerson2() {
-	return jdbcTemplate.query(findAllPersonSql, new PersonRowMapper());
-    }
-    
-    public void insertPerson(String name, int age) {
+    public void create(String name, int age) {
 	MapSqlParameterSource params = new MapSqlParameterSource()
 		.addValue("name", name)
 		.addValue("age", age);
-	jdbcTemplate.update(insertPersonSql, params);
+	jdbcTemplate.update(env.getRequiredProperty("sql.person.insert"), params);
+    }
+    
+    public void delete(String name) {
+	MapSqlParameterSource params = new MapSqlParameterSource("name", name);
+	jdbcTemplate.update(env.getRequiredProperty("sql.person.deleteByName"), params);
     }
     
 }

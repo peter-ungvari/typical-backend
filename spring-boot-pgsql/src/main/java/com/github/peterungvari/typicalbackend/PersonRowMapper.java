@@ -3,13 +3,14 @@ package com.github.peterungvari.typicalbackend;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author jupi
  */
+@Component
 public class PersonRowMapper implements RowMapper<Person> {
-
 
     @Override
     public Person mapRow(ResultSet rs, int i) throws SQLException {

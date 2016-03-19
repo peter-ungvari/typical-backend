@@ -2,14 +2,41 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 
-    <entry key="sql.findAllPerson">
+    <entry key="sql.person.findAll">
 <![CDATA[
-    select * from person where id = :id
-    --select * from person where id = ?
+	select * from person
 ]]>
     </entry>
-    <entry key="sql.insertPerson">
-	insert into person (name, age) values (:name, :age)
+    
+    <entry key="sql.person.findByName">
+<![CDATA[
+	select *
+	from person
+	where name = :name
+]]>
+    </entry>
+    
+    <entry key="sql.person.findNextPage">
+<![CDATA[
+	select *
+	from person
+	where name > :name
+	order by name
+	limit :limit
+]]>
+    </entry>
+    
+    <entry key="sql.person.insert">
+<![CDATA[
+	insert into person (name, age) 
+	    values (:name, :age)
+]]>
+    </entry>
+    
+    <entry key="sql.person.deleteByName">
+<![CDATA[
+	delete from person where name = :name
+]]>
     </entry>
 
 </properties>
