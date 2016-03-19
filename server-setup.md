@@ -69,3 +69,7 @@ Virtual Machine Server Setup
   - `\dt`: List the tables of the current database. With `*.*` argument all tables will be listed.
   - `\list`: List databases, without tables.
   - `\?`: Show help.
+
+10. Create necessary tables from script
+
+        sudo -u typical-backend-spring psql typical-backend-spring -f ddl.sql

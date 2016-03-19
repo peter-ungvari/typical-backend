@@ -1,0 +1,41 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.3.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'spring-boot'
+//apply plugin: 'application'
+
+sourceCompatibility = 8
+
+jar {
+    baseName = 'typical-backend'
+    version =  '0.0.1-SNAPSHOT'
+}
+
+springBoot {
+    mainClass = 'com.github.peterungvari.typicalbackend.Application'
+}
+
+//mainClassName = 'com.github.peterungvari.typicalbackend.Application'
+
+repositories {
+    jcenter()
+    maven { url "http://repo.spring.io/snapshot" }
+    maven { url "http://repo.spring.io/milestone" }
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-jdbc")
+    compile("postgresql:postgresql:9.1-901-1.jdbc4");
+
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}
