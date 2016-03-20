@@ -1,0 +1,24 @@
+{
+  "name": "typical-backend-node",
+  "version": "1.0.0",
+  "description": "typical-backend-node",
+  "main": "app.coffee",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/peter-ungvari/typical-backend"
+  },
+  "author": "Peter Ungvari <ungvari.mail@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/peter-ungvari/typical-backend/issues"
+  },
+  "homepage": "https://github.com/peter-ungvari/typical-backend",
+  "dependencies": {
+    "coffee-script": "^1.10.0",
+    "express": "^4.13.4",
+    "pg-promise": "^3.4.1"
+  }
+}
