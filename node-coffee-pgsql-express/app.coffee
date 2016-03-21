@@ -11,4 +11,4 @@ app.get '/', (req, res) ->
 		index:
 			person: 'GET /person'
 
-app.listen 3000, -> console.log 'typical-backend-node app listening on port 3000'
+server = app.listen 3000, -> console.log 'typical-backend-node app listening on port 3000'

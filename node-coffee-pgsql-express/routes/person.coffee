@@ -10,7 +10,7 @@ person.get '/', (req, res) ->
 			delete: 'DELETE /delete'
 
 person.get '/list', (req, res) ->
-	personDao.findAll (persons) ->
-		res.send persons
+	personDao.findAll().then (data) ->
+		res.send data
 
 module.exports = person

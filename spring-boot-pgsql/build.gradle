@@ -11,7 +11,6 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'spring-boot'
-//apply plugin: 'application'
 
 sourceCompatibility = 8
 
@@ -23,8 +22,6 @@ jar {
 springBoot {
     mainClass = 'com.github.peterungvari.typicalbackend.Application'
 }
-
-//mainClassName = 'com.github.peterungvari.typicalbackend.Application'
 
 repositories {
     jcenter()
