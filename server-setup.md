@@ -1,6 +1,8 @@
 Virtual Machine Server Setup
 ============================
 
+## General Ubuntu Setup
+
 1. Download Ubuntu 14.04 LTS (Supported till 2019)
   - http://www.ubuntu.com/download/server/
 
@@ -33,14 +35,7 @@ Virtual Machine Server Setup
 
   - Save the file with `Ctrl+X Y`
 
-7. Install Oracle Java
-
-        sudo apt-add-repository ppa:webupd8team/java
-        sudo apt-get update
-        # sudo apt-get install oracle-java8-installer
-        sudo apt-get install oracle-java8-set-default
-
-8. Create DB user and database
+7. Create DB user and database
 
         # add system user with no home directory, required for default postgresql user mapping
         sudo useradd -r -s /bin/false typical-backend-spring 
@@ -55,7 +50,7 @@ Virtual Machine Server Setup
 
   More information here: https://help.ubuntu.com/community/PostgreSQL
 
-9. Use DB client to ensure the DB is set up correctly.
+8. Use DB client to ensure the DB is set up correctly.
 
         sudo -u typical-backend-spring psql typical-backend-spring -c "\list"
 
@@ -70,6 +65,28 @@ Virtual Machine Server Setup
   - `\list`: List databases, without tables.
   - `\?`: Show help.
 
-10. Create necessary tables from script
+9. Create necessary tables from script
 
         sudo -u typical-backend-spring psql typical-backend-spring -f ddl.sql
+
+## Java Setup
+
+1. Install Oracle Java
+
+        sudo apt-add-repository ppa:webupd8team/java
+        sudo apt-get update
+        # sudo apt-get install oracle-java8-installer
+        sudo apt-get install oracle-java8-set-default
+
+## Node.js setup
+
+1. Install Node
+
+2. Install coffee-script
+
+        sudo npm i -g coffee-script
+
+3. Install dependencies
+
+        # in the directory of node-coffee-pgsql-express
+        sudo npm i

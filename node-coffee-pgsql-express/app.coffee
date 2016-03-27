@@ -1,7 +1,8 @@
 require 'coffee-script/register'
 
 express = require 'express'
-person = require './routes/person'
+person = require './router/person'
+
 app = express()
 
 app.use '/person', person
