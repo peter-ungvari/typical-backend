@@ -20,6 +20,7 @@
     "bluebird": "^3.3.4",
     "body-parser": "^1.15.0",
     "coffee-script": "^1.10.0",
+    "compression": "^1.6.1",
     "express": "^4.13.4",
     "express-validator": "^2.20.3",
     "pg-promise": "^3.4.1"
